@@ -5,13 +5,13 @@ import { useAuthStore } from "@/services/auth"
 import { supabase } from "@/services/supabase"
 import EmployeeGitHubSettings from "@/components/github/EmployeeGitHubSettings"
 import ChangePasswordModal from "@/components/modals/ChangePasswordModal"
+import AttendanceWidget from "@/components/attendance/AttendanceWidget"
 import { checkMustChangePassword } from "@/services/employee-invitation"
 import { toast } from "sonner"
 import {
   Github,
   CheckSquare,
   Calendar,
-  FileText,
   TrendingUp,
   Clock,
   Target,
@@ -147,8 +147,59 @@ export default function EmployeeHomePage() {
       </div>
 
       <div className="max-w-7xl mx-auto p-6 space-y-6">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Attendance Widget */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-1">
+            <AttendanceWidget />
+          </div>
+          
+          {/* Quick Stats */}
+          <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">My Tasks</h3>
+                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                  <CheckSquare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">{tasks.length}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                {pendingTasks} pending • {completedTasks} done
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">GitHub</h3>
+                <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                  <Github className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                {employee.github_username ? "✓" : "—"}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                {employee.github_username ? "Connected" : "Not connected"}
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">Performance</h3>
+                <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                </div>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                {tasks.length > 0 ? Math.round((completedTasks / tasks.length) * 100) : 0}%
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Completion rate</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Original Stats Cards (removed to avoid duplication) */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6" style={{ display: 'none' }}>
           <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">My Tasks</h3>

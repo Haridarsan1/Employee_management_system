@@ -22,9 +22,9 @@ export interface GeofenceConfig {
 
 // Default office location (you can make this configurable per company)
 const DEFAULT_OFFICE_LOCATION: GeofenceConfig = {
-  latitude: 0, // Set your office latitude
-  longitude: 0, // Set your office longitude
-  radius: 500 // 500 meters radius
+  latitude: 13.0063, // Set your office latitude
+  longitude: 80.2574, // Set your office longitude
+  radius: 5000 // 500 meters radius
 }
 
 /**

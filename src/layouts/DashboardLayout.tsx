@@ -11,7 +11,7 @@ import Tasks from "@/pages/dashboard/Tasks"
 import Payslips from "@/pages/dashboard/Payslips"
 import Attendance from "@/pages/dashboard/Attendance"
 import GitHubMonitoring from "@/pages/dashboard/GitHubMonitoring"
-import ReportsAnalytics from "@/pages/dashboard/ReportsAnalytics"
+import AnalyticsDashboard from "@/pages/dashboard/AnalyticsDashboard"
 import AdvancedFeatures from "@/pages/dashboard/AdvancedFeatures"
 import Settings from "@/pages/dashboard/Settings"
 import EmployeeGitHubDetail from "@/pages/dashboard/EmployeeGitHubDetail"
@@ -38,7 +38,8 @@ export default function DashboardLayout() {
               <Route path="/payslips" element={<Payslips />} />
               <Route path="/attendance" element={<Attendance />} />
               <Route path="/github" element={<GitHubMonitoring />} />
-              <Route path="/reports" element={<ReportsAnalytics />} />
+              <Route path="/reports" element={<AnalyticsDashboard />} />
+              <Route path="/analytics" element={<AnalyticsDashboard />} />
               <Route path="/advanced" element={<AdvancedFeatures />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>
