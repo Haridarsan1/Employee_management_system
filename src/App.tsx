@@ -6,6 +6,7 @@ import DashboardLayout from "@/layouts/DashboardLayout"
 import EmployeeHome from "@/pages/employee/EmployeeHome"
 import ProtectedRoute from "@/components/auth/ProtectedRoute"
 import { Toaster } from "sonner"
+import { ThemeProvider } from "@/contexts/ThemeContext"
 
 function App() {
   const { isAuthenticated, isLoading, userRole } = useAuthStore()
@@ -28,7 +29,7 @@ function App() {
   }
 
   return (
-    <>
+    <ThemeProvider>
       <Router>
         <Routes>
           <Route 
@@ -78,7 +79,7 @@ function App() {
         </Routes>
       </Router>
       <Toaster position="top-right" />
-    </>
+    </ThemeProvider>
   )
 }
 

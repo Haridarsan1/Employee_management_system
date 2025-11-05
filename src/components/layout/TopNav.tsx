@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { useAuthStore } from "@/services/auth"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
+import { useTheme } from "@/contexts/ThemeContext"
 import { 
   Menu, 
   Search, 
@@ -12,10 +13,9 @@ import {
   Settings, 
   LogOut, 
   ChevronDown,
-  Sun,
-  Moon,
   MessageSquare
 } from "lucide-react"
+import { ThemeToggleButton } from "@/components/common/ThemeSelector"
 
 interface TopNavProps {
   onToggleSidebar: () => void
@@ -27,7 +27,6 @@ export default function TopNav({ onToggleSidebar }: TopNavProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [showNotifications, setShowNotifications] = useState(false)
   const [showProfileMenu, setShowProfileMenu] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const profileMenuRef = useRef<HTMLDivElement>(null)
   const notificationRef = useRef<HTMLDivElement>(null)
 
@@ -53,11 +52,6 @@ export default function TopNav({ onToggleSidebar }: TopNavProps) {
     } catch (error) {
       toast.error("Failed to logout")
     }
-  }
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    document.documentElement.classList.toggle('dark')
   }
 
   const notifications = [
@@ -95,17 +89,8 @@ export default function TopNav({ onToggleSidebar }: TopNavProps) {
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors duration-200"
-          >
-            {isDarkMode ? (
-              <Sun className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-            ) : (
-              <Moon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-            )}
-          </button>
+          {/* Theme Toggle */}
+          <ThemeToggleButton />
 
           {/* Notifications */}
           <div className="relative" ref={notificationRef}>
